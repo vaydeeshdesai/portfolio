@@ -3,17 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #080808;
-  --bg-secondary: #0f0f0f;
-  --bg-card: #111111;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --accent-primary: #00d4ff;
-  --accent-dim: rgba(0, 212, 255, 0.12);
-  --text-primary: #f1f1f1;
-  --text-secondary: #8a8f98;
-  --text-muted: #4a4f58;
+  --bg-primary: #09090b;
+  --bg-secondary: #0f0f12;
+  --bg-card: #111116;
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-mid: rgba(255, 255, 255, 0.08);
+
+  /* Accent: indigo-violet — professional, technical, not "gamer" */
+  --accent-primary: #818cf8;
+  --accent-dim: rgba(129, 140, 248, 0.1);
+
+  --text-primary: #f4f4f5;
+  --text-secondary: #8b8f9a;
+  --text-muted: #52525b;
 }
 
 html {
@@ -23,8 +26,8 @@ html {
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.07); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.13); }
 
 body {
   background-color: var(--bg-primary);
@@ -34,19 +37,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle radial glow — only at the very top of the page */
+/* Very faint radial at the very top only */
 body::before {
   content: "";
   position: fixed;
-  top: -200px;
+  top: -300px;
   left: 50%;
   transform: translateX(-50%);
-  width: 800px;
-  height: 600px;
+  width: 900px;
+  height: 700px;
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 212, 255, 0.04) 0%,
-    transparent 70%
+    rgba(129, 140, 248, 0.035) 0%,
+    transparent 65%
   );
   z-index: -1;
   pointer-events: none;
@@ -56,26 +59,26 @@ body::before {
 .card {
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .card-hover {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 .card-hover:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Nav ────────────────────────────────────────────── */
 .nav-base {
-  background: rgba(8, 8, 8, 0.7);
+  background: rgba(9, 9, 11, 0.7);
   border-bottom: 1px solid var(--border-subtle);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 .nav-scrolled {
-  background: rgba(8, 8, 8, 0.92);
+  background: rgba(9, 9, 11, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
@@ -85,39 +88,37 @@ body::before {
   font-family: var(--font-space-mono), monospace;
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-primary);
-  opacity: 0.8;
+  color: var(--text-muted);
 }
 
 .section-title {
   font-family: var(--font-space-mono), monospace;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
 }
 
 /* ── Divider ─────────────────────────────────────────── */
 .divider {
-  width: 32px;
+  width: 28px;
   height: 1px;
-  background: var(--accent-primary);
-  opacity: 0.5;
+  background: var(--border-mid);
 }
 
 /* ── Tech pills ─────────────────────────────────────── */
 .tech-pill {
   display: inline-block;
-  padding: 3px 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
+  padding: 3px 9px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--text-secondary);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
   font-family: var(--font-space-mono), monospace;
   white-space: nowrap;
 }
@@ -126,40 +127,41 @@ body::before {
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
+  gap: 7px;
+  padding: 9px 20px;
   background: var(--accent-primary);
-  color: #000;
+  color: #09090b;
   font-family: var(--font-dm-sans), sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   border-radius: 6px;
   transition: opacity 0.15s ease, box-shadow 0.15s ease;
   letter-spacing: 0.01em;
 }
 .btn-primary:hover {
-  opacity: 0.88;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+  opacity: 0.9;
+  box-shadow: 0 0 24px rgba(129, 140, 248, 0.3);
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 22px;
+  gap: 7px;
+  padding: 8px 20px;
   background: transparent;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-family: var(--font-dm-sans), sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: border-color 0.15s ease, background 0.15s ease;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   letter-spacing: 0.01em;
 }
 .btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* ── Section layout ──────────────────────────────────── */
@@ -172,10 +174,10 @@ body::before {
 /* ── Status dot ──────────────────────────────────────── */
 @keyframes statusPulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.35; }
 }
 .status-dot {
-  animation: statusPulse 2.5s ease-in-out infinite;
+  animation: statusPulse 2.8s ease-in-out infinite;
 }
 
 /* ── Horizontal rule ─────────────────────────────────── */
@@ -188,6 +190,6 @@ body::before {
 .mono-label {
   font-family: var(--font-space-mono), monospace;
   font-size: 11px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
 }

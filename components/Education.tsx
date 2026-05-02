@@ -67,25 +67,13 @@ export default function Education() {
                 {education.dates} · {education.location}
               </p>
 
-              {/* GPA badge */}
-              <div
-                className="inline-flex items-center gap-2 px-3 py-1 rounded mb-6"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  background: "rgba(255,255,255,0.03)",
-                }}
+              {/* GPA — inline, no box */}
+              <p
+                className="font-mono text-[12px] mb-6"
+                style={{ color: "var(--text-secondary)", letterSpacing: "0.04em" }}
               >
-                <span
-                  className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                  style={{ background: "var(--accent-primary)", opacity: 0.8 }}
-                />
-                <span
-                  className="font-mono text-[11px]"
-                  style={{ color: "var(--text-secondary)", letterSpacing: "0.06em" }}
-                >
-                  {education.gpa}
-                </span>
-              </div>
+                {education.gpa}
+              </p>
 
               {/* Coursework */}
               <div>
@@ -116,7 +104,7 @@ export default function Education() {
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                  style={{ background: "var(--accent-primary)", opacity: 0.7 }}
+                  style={{ background: "var(--text-muted)" }}
                 />
                 <div>
                   <p

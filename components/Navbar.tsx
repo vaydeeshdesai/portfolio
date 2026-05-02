@@ -99,7 +99,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 flex flex-col pt-14"
-            style={{ background: "rgba(8,8,8,0.98)" }}
+            style={{ background: "rgba(9,9,11,0.98)" }}
           >
             <div className="flex flex-col items-start gap-0 px-8 pt-10">
               {navLinks.map((link, i) => (

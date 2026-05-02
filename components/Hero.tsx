@@ -7,12 +7,12 @@ import { personalInfo } from "@/lib/data";
 
 const container: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.09 } },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export default function Hero() {
@@ -28,36 +28,39 @@ export default function Hero() {
         className="section-container w-full py-28"
       >
         {/* Status row */}
-        <motion.div variants={item} className="flex items-center gap-2 mb-10">
+        <motion.div variants={item} className="flex items-center gap-2 mb-12">
           <span
             className="status-dot w-1.5 h-1.5 rounded-full flex-shrink-0"
             style={{ background: "#22c55e" }}
           />
-          <span className="mono-label">{personalInfo.coopAvailability}</span>
+          <span className="mono-label" style={{ letterSpacing: "0.12em" }}>
+            {personalInfo.coopAvailability}
+          </span>
         </motion.div>
 
         {/* Name */}
         <motion.h1
           variants={item}
-          className="font-mono font-bold text-white mb-5"
+          className="font-mono font-bold text-white mb-4"
           style={{
-            fontSize: "clamp(38px, 6vw, 72px)",
-            letterSpacing: "-0.03em",
-            lineHeight: 1.02,
+            fontSize: "clamp(42px, 6.5vw, 80px)",
+            letterSpacing: "-0.035em",
+            lineHeight: 1.0,
           }}
         >
-          Vaydeesh Desai
+          Vaydeesh<br />Desai
         </motion.h1>
 
-        {/* Role — accent, no glow */}
+        {/* Role */}
         <motion.p
           variants={item}
-          className="font-mono mb-5"
+          className="mb-6"
           style={{
-            fontSize: "clamp(15px, 1.8vw, 20px)",
+            fontSize: "clamp(13px, 1.4vw, 16px)",
             color: "var(--accent-primary)",
-            letterSpacing: "0em",
-            opacity: 0.85,
+            fontFamily: "var(--font-space-mono)",
+            letterSpacing: "0.03em",
+            opacity: 0.75,
           }}
         >
           Software Engineer · CS + Finance @ Northeastern
@@ -68,10 +71,10 @@ export default function Hero() {
           variants={item}
           style={{
             color: "var(--text-secondary)",
-            maxWidth: 500,
-            fontSize: "clamp(14px, 1.4vw, 15px)",
+            maxWidth: 460,
+            fontSize: "15px",
             fontFamily: "var(--font-dm-sans)",
-            lineHeight: 1.7,
+            lineHeight: 1.75,
             marginBottom: "2.5rem",
           }}
         >
@@ -79,7 +82,7 @@ export default function Hero() {
         </motion.p>
 
         {/* CTAs */}
-        <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-12">
+        <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-14">
           <button
             className="btn-primary"
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
@@ -97,19 +100,23 @@ export default function Hero() {
         </motion.div>
 
         {/* Social row */}
-        <motion.div variants={item} className="flex items-center gap-6">
+        <motion.div variants={item} className="flex items-center gap-7">
           {[
-            { href: `https://${personalInfo.github}`, icon: <GitHubIcon size={15} />, label: "GitHub" },
-            { href: `https://${personalInfo.linkedin}`, icon: <LinkedInIcon size={15} />, label: "LinkedIn" },
-            { href: `mailto:${personalInfo.email}`, icon: <Mail size={15} />, label: personalInfo.email },
+            { href: `https://${personalInfo.github}`, icon: <GitHubIcon size={14} />, label: "GitHub" },
+            { href: `https://${personalInfo.linkedin}`, icon: <LinkedInIcon size={14} />, label: "LinkedIn" },
+            { href: `mailto:${personalInfo.email}`, icon: <Mail size={14} />, label: personalInfo.email },
           ].map(({ href, icon, label }) => (
             <a
               key={label}
               href={href}
               target={href.startsWith("mailto") ? undefined : "_blank"}
               rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-              className="flex items-center gap-2 text-[12px] transition-colors duration-150 hover:text-white"
-              style={{ color: "var(--text-muted)", fontFamily: "var(--font-dm-sans)" }}
+              className="flex items-center gap-2 transition-colors duration-150 hover:text-white"
+              style={{
+                color: "var(--text-muted)",
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: "12px",
+              }}
             >
               {icon}
               <span className="hidden sm:inline">{label}</span>
@@ -118,7 +125,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom divider */}
+      {/* Bottom border */}
       <div
         className="absolute bottom-0 inset-x-0 h-px"
         style={{ background: "var(--border-subtle)" }}

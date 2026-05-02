@@ -34,7 +34,7 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-16 items-start">
-          {/* Bio — wider column */}
+          {/* Bio */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -43,7 +43,6 @@ export default function About() {
             className="lg:col-span-3"
           >
             <p
-              className="leading-relaxed"
               style={{
                 color: "var(--text-secondary)",
                 fontFamily: "var(--font-dm-sans)",
@@ -62,38 +61,37 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Stats — narrower column */}
-          <div className="lg:col-span-2 grid grid-cols-2 gap-3">
+          {/* Stats — ruled list, no cards */}
+          <div className="lg:col-span-2">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" as const }}
-                className="card p-5"
+                transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" as const }}
+                className="flex items-baseline justify-between py-4"
+                style={{
+                  borderBottom: "1px solid var(--border-subtle)",
+                  borderTop: i === 0 ? "1px solid var(--border-subtle)" : undefined,
+                }}
               >
-                <p
-                  className="font-mono font-bold mb-1"
+                <span
+                  className="font-mono text-[11px] uppercase"
+                  style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
+                >
+                  {stat.label}
+                </span>
+                <span
+                  className="font-mono font-bold"
                   style={{
-                    fontSize: stat.value.length > 6 ? "17px" : "26px",
+                    fontSize: stat.value.length > 6 ? "14px" : "18px",
                     color: "var(--text-primary)",
                     letterSpacing: "-0.02em",
                   }}
                 >
                   {stat.value}
-                </p>
-                <p
-                  style={{
-                    color: "var(--text-muted)",
-                    fontSize: "11px",
-                    fontFamily: "var(--font-space-mono)",
-                    letterSpacing: "0.05em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {stat.label}
-                </p>
+                </span>
               </motion.div>
             ))}
           </div>
