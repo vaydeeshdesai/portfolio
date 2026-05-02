@@ -81,7 +81,7 @@ export default function Projects() {
                 className="text-sm leading-relaxed mb-4"
                 style={{
                   color: "var(--text-secondary)",
-                  fontFamily: "var(--font-dm-sans)",
+                  fontFamily: "var(--font-sans)",
                   lineHeight: 1.65,
                 }}
               >
@@ -94,7 +94,7 @@ export default function Projects() {
                   <li
                     key={bi}
                     className="flex gap-2.5 text-[13px] leading-relaxed"
-                    style={{ color: "var(--text-secondary)", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}
                   >
                     <span
                       className="mt-2 flex-shrink-0 w-1 h-1 rounded-full"

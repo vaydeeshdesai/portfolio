@@ -53,13 +53,13 @@ export default function Education() {
               </p>
               <p
                 className="text-sm mb-1"
-                style={{ color: "var(--text-secondary)", fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}
               >
                 {education.college}
               </p>
               <p
                 className="text-sm font-medium mb-1"
-                style={{ color: "var(--accent-primary)", opacity: 0.85, fontFamily: "var(--font-dm-sans)" }}
+                style={{ color: "var(--accent-primary)", opacity: 0.85, fontFamily: "var(--font-sans)" }}
               >
                 {education.degree}
               </p>
@@ -109,7 +109,7 @@ export default function Education() {
                 <div>
                   <p
                     className="text-[13px] font-medium"
-                    style={{ color: "var(--text-primary)", fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "var(--text-primary)", fontFamily: "var(--font-sans)" }}
                   >
                     {cert.name}
                   </p>

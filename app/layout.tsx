@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Space_Mono, DM_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-const spaceMono = Space_Mono({
-  weight: ["400", "700"],
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-space-mono",
+  variable: "--font-mono",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceMono.variable} ${dmSans.variable} antialiased font-sans`}
+        className={`${ibmPlexMono.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>

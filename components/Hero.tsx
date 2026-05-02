@@ -58,7 +58,7 @@ export default function Hero() {
           style={{
             fontSize: "clamp(13px, 1.4vw, 16px)",
             color: "var(--accent-primary)",
-            fontFamily: "var(--font-space-mono)",
+            fontFamily: "var(--font-mono)",
             letterSpacing: "0.03em",
             opacity: 0.75,
           }}
@@ -73,7 +73,7 @@ export default function Hero() {
             color: "var(--text-secondary)",
             maxWidth: 460,
             fontSize: "15px",
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-sans)",
             lineHeight: 1.75,
             marginBottom: "2.5rem",
           }}
@@ -114,7 +114,7 @@ export default function Hero() {
               className="flex items-center gap-2 transition-colors duration-150 hover:text-white"
               style={{
                 color: "var(--text-muted)",
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-sans)",
                 fontSize: "12px",
               }}
             >

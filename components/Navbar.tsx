@@ -67,7 +67,7 @@ export default function Navbar() {
                     className="text-[13px] transition-colors duration-150"
                     style={{
                       color: isActive ? "var(--text-primary)" : "var(--text-muted)",
-                      fontFamily: "var(--font-dm-sans)",
+                      fontFamily: "var(--font-sans)",
                       fontWeight: isActive ? 500 : 400,
                     }}
                   >

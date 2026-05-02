@@ -45,7 +45,7 @@ export default function About() {
             <p
               style={{
                 color: "var(--text-secondary)",
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-sans)",
                 fontSize: "15px",
                 lineHeight: 1.8,
               }}

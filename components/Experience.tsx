@@ -70,7 +70,7 @@ export default function Experience() {
                   </p>
                   <p
                     className="mb-4 text-sm"
-                    style={{ color: "var(--accent-primary)", opacity: 0.8, fontFamily: "var(--font-dm-sans)" }}
+                    style={{ color: "var(--accent-primary)", opacity: 0.8, fontFamily: "var(--font-sans)" }}
                   >
                     {exp.role}
                   </p>
@@ -80,7 +80,7 @@ export default function Experience() {
                       <li
                         key={bi}
                         className="flex gap-3 text-sm leading-relaxed"
-                        style={{ color: "var(--text-secondary)", fontFamily: "var(--font-dm-sans)" }}
+                        style={{ color: "var(--text-secondary)", fontFamily: "var(--font-sans)" }}
                       >
                         <span
                           className="mt-2 flex-shrink-0 w-1 h-1 rounded-full"

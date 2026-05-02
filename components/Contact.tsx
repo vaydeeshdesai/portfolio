@@ -62,7 +62,7 @@ export default function Contact() {
               className="leading-relaxed mb-8 text-sm"
               style={{
                 color: "var(--text-secondary)",
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-sans)",
                 lineHeight: 1.8,
                 fontSize: "15px",
               }}
@@ -122,7 +122,7 @@ export default function Contact() {
                       className="text-[13px] truncate transition-colors duration-150 group-hover:text-white"
                       style={{
                         color: "var(--text-secondary)",
-                        fontFamily: "var(--font-dm-sans)",
+                        fontFamily: "var(--font-sans)",
                       }}
                     >
                       {link.display}
