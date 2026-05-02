@@ -8,7 +8,6 @@ const fadeUp: Variants = {
 };
 
 const stats = [
-  { value: "3.93", label: "GPA · Dean's List" },
   { value: "3+", label: "Years building" },
   { value: "5+", label: "Technologies" },
   { value: "Jul–Dec 2026", label: "Next co-op" },

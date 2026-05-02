@@ -67,14 +67,6 @@ export default function Education() {
                 {education.dates} · {education.location}
               </p>
 
-              {/* GPA — inline, no box */}
-              <p
-                className="font-mono text-[12px] mb-6"
-                style={{ color: "var(--text-secondary)", letterSpacing: "0.04em" }}
-              >
-                {education.gpa}
-              </p>
-
               {/* Coursework */}
               <div>
                 <p className="mono-label mb-3">Coursework</p>
