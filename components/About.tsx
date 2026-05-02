@@ -8,9 +8,8 @@ const fadeUp: Variants = {
 };
 
 const stats = [
-  { value: "3+", label: "Years building" },
+  { value: "6+", label: "Years building" },
   { value: "5+", label: "Technologies" },
-  { value: "Jul–Dec 2026", label: "Next co-op" },
 ];
 
 export default function About() {
