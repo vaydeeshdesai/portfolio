@@ -2,71 +2,53 @@
 
 import { motion, type Variants } from "framer-motion";
 
-interface StatCard {
-  value: string;
-  label: string;
-}
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
 
-const stats: StatCard[] = [
+const stats = [
   { value: "3.93", label: "GPA · Dean's List" },
-  { value: "3+", label: "Years Building" },
+  { value: "3+", label: "Years building" },
   { value: "5+", label: "Technologies" },
-  { value: "Jul–Dec 2026", label: "Next Co-op" },
+  { value: "Jul–Dec 2026", label: "Next co-op" },
 ];
-
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const },
-  }),
-};
 
 export default function About() {
   return (
-    <section id="about" className="py-24">
+    <section id="about" className="py-28">
       <div className="section-container">
-        {/* Section heading */}
+        {/* Heading */}
         <motion.div
-          variants={sectionVariants}
+          variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="mb-16"
         >
-          <p className="section-label mb-3">About Me</p>
-          <h2
-            className="font-mono font-bold text-white mb-4"
-            style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
-          >
+          <p className="section-eyebrow mb-3">About</p>
+          <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
             Who I Am
           </h2>
-          <div className="accent-bar" />
+          <div className="divider mt-4" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: text */}
+        <div className="grid lg:grid-cols-5 gap-16 items-start">
+          {/* Bio — wider column */}
           <motion.div
-            variants={sectionVariants}
+            variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            className="lg:col-span-3"
           >
             <p
-              className="leading-relaxed text-[17px]"
+              className="leading-relaxed"
               style={{
                 color: "var(--text-secondary)",
                 fontFamily: "var(--font-dm-sans)",
+                fontSize: "15px",
+                lineHeight: 1.8,
               }}
             >
               Computer Science and Business Administration student at
@@ -80,23 +62,23 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Right: 2×2 stat grid */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Stats — narrower column */}
+          <div className="lg:col-span-2 grid grid-cols-2 gap-3">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="glass-card p-6 text-center"
+                transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" as const }}
+                className="card p-5"
               >
                 <p
-                  className="font-mono font-bold mb-1 text-glow"
+                  className="font-mono font-bold mb-1"
                   style={{
-                    fontSize: stat.value.length > 6 ? "20px" : "32px",
-                    color: "var(--accent-primary)",
+                    fontSize: stat.value.length > 6 ? "17px" : "26px",
+                    color: "var(--text-primary)",
+                    letterSpacing: "-0.02em",
                   }}
                 >
                   {stat.value}
@@ -104,8 +86,10 @@ export default function About() {
                 <p
                   style={{
                     color: "var(--text-muted)",
-                    fontSize: "13px",
-                    fontFamily: "var(--font-dm-sans)",
+                    fontSize: "11px",
+                    fontFamily: "var(--font-space-mono)",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
                   }}
                 >
                   {stat.label}

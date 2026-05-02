@@ -3,149 +3,103 @@
 import { motion, type Variants } from "framer-motion";
 import { experiences } from "@/lib/data";
 
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, x: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, delay: i * 0.12, ease: "easeOut" as const },
-  }),
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24">
+    <section id="experience" className="py-28">
+      <div
+        className="absolute inset-x-0 h-px"
+        style={{ background: "var(--border-subtle)" }}
+      />
       <div className="section-container">
-        {/* Section heading */}
+        {/* Heading */}
         <motion.div
-          variants={sectionVariants}
+          variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="mb-16"
         >
-          <p className="section-label mb-3">Experience</p>
-          <h2
-            className="font-mono font-bold text-white mb-4"
-            style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
-          >
+          <p className="section-eyebrow mb-3">Experience</p>
+          <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
             Where I&apos;ve Worked
           </h2>
-          <div className="accent-bar" />
+          <div className="divider mt-4" />
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div
-            className="absolute left-4 top-0 bottom-0 w-0.5 hidden md:block"
-            style={{
-              background:
-                "linear-gradient(to bottom, var(--accent-primary), transparent)",
-            }}
-          />
+        {/* Entry list */}
+        <div className="flex flex-col">
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={`${exp.company}-${i}`}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.48, delay: i * 0.1, ease: "easeOut" as const }}
+              className="py-8 border-b"
+              style={{ borderColor: "var(--border-subtle)" }}
+            >
+              <div className="grid md:grid-cols-4 gap-6">
+                {/* Left meta */}
+                <div className="md:col-span-1">
+                  <p
+                    className="font-mono text-[11px] mb-2"
+                    style={{ color: "var(--text-muted)", letterSpacing: "0.05em" }}
+                  >
+                    {exp.date}
+                  </p>
+                  <p
+                    className="font-mono text-[11px]"
+                    style={{ color: "var(--text-muted)", letterSpacing: "0.03em" }}
+                  >
+                    {exp.location}
+                  </p>
+                </div>
 
-          <div className="flex flex-col gap-8">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={`${exp.company}-${i}`}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                className="relative md:pl-14"
-              >
-                {/* Timeline dot */}
-                <div
-                  className="timeline-dot absolute left-2 top-6 w-3 h-3 rounded-full hidden md:block"
-                  style={{
-                    background: "var(--accent-primary)",
-                    transform: "translateX(-50%)",
-                    zIndex: 2,
-                  }}
-                />
+                {/* Right content */}
+                <div className="md:col-span-3">
+                  <p
+                    className="font-mono font-bold mb-1"
+                    style={{ color: "var(--text-primary)", fontSize: "15px" }}
+                  >
+                    {exp.company}
+                  </p>
+                  <p
+                    className="mb-4 text-sm"
+                    style={{ color: "var(--accent-primary)", opacity: 0.8, fontFamily: "var(--font-dm-sans)" }}
+                  >
+                    {exp.role}
+                  </p>
 
-                <div className="glass-card p-6 md:p-8">
-                  {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-                    <div>
-                      <h3
-                        className="font-mono font-bold text-white text-lg mb-1"
-                        style={{ letterSpacing: "-0.01em" }}
-                      >
-                        {exp.company}
-                      </h3>
-                      <p
-                        className="font-semibold text-sm"
-                        style={{ color: "var(--accent-primary)" }}
-                      >
-                        {exp.role}
-                      </p>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <p
-                        className="text-sm mb-1"
-                        style={{
-                          color: "var(--text-muted)",
-                          fontFamily: "var(--font-dm-sans)",
-                        }}
-                      >
-                        {exp.date}
-                      </p>
-                      <p
-                        className="text-sm italic"
-                        style={{
-                          color: "var(--text-muted)",
-                          fontFamily: "var(--font-dm-sans)",
-                        }}
-                      >
-                        {exp.location}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Bullets */}
-                  <ul className="mb-5 space-y-2">
-                    {exp.bullets.map((bullet, bi) => (
+                  <ul className="space-y-2 mb-5">
+                    {exp.bullets.map((b, bi) => (
                       <li
                         key={bi}
                         className="flex gap-3 text-sm leading-relaxed"
-                        style={{
-                          color: "var(--text-secondary)",
-                          fontFamily: "var(--font-dm-sans)",
-                        }}
+                        style={{ color: "var(--text-secondary)", fontFamily: "var(--font-dm-sans)" }}
                       >
                         <span
-                          className="shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full"
-                          style={{ background: "var(--accent-primary)" }}
+                          className="mt-2 flex-shrink-0 w-1 h-1 rounded-full"
+                          style={{ background: "var(--text-muted)" }}
                         />
-                        {bullet}
+                        {b}
                       </li>
                     ))}
                   </ul>
 
-                  {/* Tech pills */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {exp.tech.map((t) => (
-                      <span key={t} className="tech-pill">
-                        {t}
-                      </span>
+                      <span key={t} className="tech-pill">{t}</span>
                     ))}
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

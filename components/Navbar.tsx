@@ -2,14 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { X, Menu } from "lucide-react";
 
-interface NavLink {
-  label: string;
-  href: string;
-}
-
-const navLinks: NavLink[] = [
+const navLinks = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
@@ -19,104 +14,77 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
       const sections = navLinks.map((l) => l.href.replace("#", ""));
       let current = "";
       for (const id of sections) {
         const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) current = id;
-        }
+        if (el && el.getBoundingClientRect().top <= 100) current = id;
       }
-      setActiveSection(current);
+      setActive(current);
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMenuOpen(false);
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+  const scrollTo = (href: string) => {
+    setOpen(false);
+    document.getElementById(href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
       <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "glass-nav-scrolled" : "glass-nav"
-        }`}
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" as const }}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "nav-scrolled" : "nav-base"}`}
       >
         <div className="section-container">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14">
             {/* Logo */}
-            <motion.a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="font-mono font-bold text-xl text-glow"
-              style={{ color: "var(--accent-primary)" }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="font-mono text-sm font-bold tracking-widest"
+              style={{ color: "var(--text-primary)" }}
             >
               VD
-            </motion.a>
+            </button>
 
-            {/* Desktop nav links */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Desktop links */}
+            <div className="hidden md:flex items-center gap-7">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.href.replace("#", "");
+                const isActive = active === link.href.replace("#", "");
                 return (
                   <button
                     key={link.href}
-                    onClick={() => handleNavClick(link.href)}
-                    className="relative text-sm font-medium transition-colors duration-200 pb-1"
+                    onClick={() => scrollTo(link.href)}
+                    className="text-[13px] transition-colors duration-150"
                     style={{
-                      color: isActive
-                        ? "var(--accent-primary)"
-                        : "var(--text-secondary)",
+                      color: isActive ? "var(--text-primary)" : "var(--text-muted)",
                       fontFamily: "var(--font-dm-sans)",
+                      fontWeight: isActive ? 500 : 400,
                     }}
                   >
                     {link.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeNav"
-                        className="absolute bottom-0 left-0 right-0 h-px"
-                        style={{
-                          background: "var(--accent-primary)",
-                          boxShadow: "0 0 8px rgba(0,212,255,0.8)",
-                        }}
-                      />
-                    )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Mobile hamburger */}
+            {/* Mobile toggle */}
             <button
-              className="md:hidden p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors"
-              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-1"
+              style={{ color: "var(--text-muted)" }}
+              onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
             >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              {open ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -124,34 +92,28 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <AnimatePresence>
-        {menuOpen && (
+        {open && (
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col"
-            style={{ background: "rgba(0,0,0,0.96)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 flex flex-col pt-14"
+            style={{ background: "rgba(8,8,8,0.98)" }}
           >
-            <div className="flex justify-end p-5">
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors"
-              >
-                <X size={26} />
-              </button>
-            </div>
-            <div className="flex flex-col items-center justify-center flex-1 gap-10">
+            <div className="flex flex-col items-start gap-0 px-8 pt-10">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-3xl font-mono font-bold transition-colors"
-                  style={{ color: "var(--text-primary)" }}
-                  whileHover={{ color: "var(--accent-primary)", scale: 1.05 }}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06 }}
+                  onClick={() => scrollTo(link.href)}
+                  className="w-full text-left py-4 text-2xl font-mono font-bold border-b"
+                  style={{
+                    color: "var(--text-primary)",
+                    borderColor: "var(--border-subtle)",
+                  }}
                 >
                   {link.label}
                 </motion.button>

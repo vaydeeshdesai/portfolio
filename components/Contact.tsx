@@ -5,38 +5,27 @@ import { Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import { personalInfo } from "@/lib/data";
 
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-interface ContactRow {
-  icon: React.ReactNode;
-  label: string;
-  href: string;
-  display: string;
-}
-
 export default function Contact() {
-  const contactRows: ContactRow[] = [
+  const links = [
     {
-      icon: <Mail size={20} />,
+      icon: <Mail size={15} />,
       label: "Email",
       href: `mailto:${personalInfo.email}`,
       display: personalInfo.email,
     },
     {
-      icon: <LinkedInIcon size={20} />,
+      icon: <LinkedInIcon size={15} />,
       label: "LinkedIn",
       href: `https://${personalInfo.linkedin}`,
       display: personalInfo.linkedin,
     },
     {
-      icon: <GitHubIcon size={20} />,
+      icon: <GitHubIcon size={15} />,
       label: "GitHub",
       href: `https://${personalInfo.github}`,
       display: personalInfo.github,
@@ -44,39 +33,38 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-28">
       <div className="section-container">
-        {/* Section heading */}
+        {/* Heading */}
         <motion.div
-          variants={sectionVariants}
+          variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="mb-16"
         >
-          <p className="section-label mb-3">Contact</p>
-          <h2
-            className="font-mono font-bold text-white mb-4"
-            style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
-          >
+          <p className="section-eyebrow mb-3">Contact</p>
+          <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
             Get In Touch
           </h2>
-          <div className="accent-bar" />
+          <div className="divider mt-4" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left: copy */}
+        <div className="grid lg:grid-cols-2 gap-16 items-start max-w-3xl">
+          {/* Left: copy + availability */}
           <motion.div
-            variants={sectionVariants}
+            variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
             <p
-              className="leading-relaxed text-[17px] mb-8"
+              className="leading-relaxed mb-8 text-sm"
               style={{
                 color: "var(--text-secondary)",
                 fontFamily: "var(--font-dm-sans)",
+                lineHeight: 1.8,
+                fontSize: "15px",
               }}
             >
               I&apos;m on co-op for July–December 2026. If you&apos;re working on
@@ -86,67 +74,69 @@ export default function Contact() {
 
             {/* Availability badge */}
             <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded"
               style={{
-                background: "rgba(34,197,94,0.08)",
-                border: "1px solid rgba(34,197,94,0.25)",
-                color: "#22c55e",
-                fontFamily: "var(--font-dm-sans)",
+                border: "1px solid rgba(34,197,94,0.2)",
+                background: "rgba(34,197,94,0.05)",
               }}
             >
-              <span className="green-dot w-2 h-2 rounded-full shrink-0" style={{ background: "#22c55e" }} />
-              Co-op · Jul–Dec 2026
+              <span
+                className="status-dot w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: "#22c55e" }}
+              />
+              <span
+                className="font-mono text-[11px]"
+                style={{ color: "#22c55e", opacity: 0.85, letterSpacing: "0.06em" }}
+              >
+                CO-OP · JUL–DEC 2026
+              </span>
             </div>
           </motion.div>
 
-          {/* Right: contact card */}
+          {/* Right: link list */}
           <motion.div
-            variants={sectionVariants}
+            variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <div className="glass-card p-6 md:p-8 mb-5">
-              <div className="flex flex-col gap-5">
-                {contactRows.map((row) => (
-                  <motion.a
-                    key={row.label}
-                    href={row.href}
-                    target={row.href.startsWith("mailto") ? undefined : "_blank"}
-                    rel={row.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                    className="flex items-center gap-4 group"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "tween", duration: 0.15 }}
+            <div className="flex flex-col gap-3">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  className="card flex items-center gap-4 px-5 py-4 group transition-colors duration-150"
+                  style={{ textDecoration: "none" }}
+                >
+                  <span
+                    className="flex-shrink-0 transition-colors duration-150"
+                    style={{ color: "var(--text-muted)" }}
                   >
-                    <span
-                      style={{ color: "var(--accent-primary)" }}
-                      className="shrink-0"
-                    >
-                      {row.icon}
-                    </span>
-                    <span
-                      className="text-sm transition-colors duration-200 group-hover:text-[var(--accent-primary)]"
+                    {link.icon}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="mono-label mb-0.5">{link.label}</p>
+                    <p
+                      className="text-[13px] truncate transition-colors duration-150 group-hover:text-white"
                       style={{
-                        color: "var(--text-primary)",
+                        color: "var(--text-secondary)",
                         fontFamily: "var(--font-dm-sans)",
                       }}
                     >
-                      {row.display}
-                    </span>
-                  </motion.a>
-                ))}
-              </div>
+                      {link.display}
+                    </p>
+                  </div>
+                  <span
+                    className="flex-shrink-0 font-mono text-[11px] opacity-0 group-hover:opacity-40 transition-opacity duration-150"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    ↗
+                  </span>
+                </a>
+              ))}
             </div>
-
-            {/* CTA button */}
-            <motion.a
-              href={`mailto:${personalInfo.email}`}
-              className="btn-secondary w-full justify-center"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Say Hello →
-            </motion.a>
           </motion.div>
         </div>
       </div>

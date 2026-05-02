@@ -1,200 +1,128 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { motion, type Variants } from "framer-motion";
-import { Mail, ChevronDown } from "lucide-react";
+import { ArrowRight, FileText, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 import { personalInfo } from "@/lib/data";
 
-// Dynamically import Typewriter to avoid SSR issues
-const Typewriter = dynamic(() => import("typewriter-effect"), { ssr: false });
-
-// Dynamically import particles to avoid SSR issues
-const ParticleBackground = dynamic(
-  () => import("@/components/ParticleBackground"),
-  { ssr: false }
-);
-
-const containerVariants: Variants = {
+const container: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
+const item: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };
 
 export default function Hero() {
-  const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollDown = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section
-      className="relative flex items-center justify-center overflow-hidden"
-      style={{ minHeight: "100vh" }}
+      className="relative flex items-center"
+      style={{ minHeight: "100vh", paddingTop: "56px" }}
     >
-      {/* Particle background */}
-      <div className="absolute inset-0 z-0">
-        <ParticleBackground />
-      </div>
-
-      {/* Content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center px-6"
-        variants={containerVariants}
+        variants={container}
         initial="hidden"
         animate="visible"
+        className="section-container w-full py-28"
       >
-        {/* Availability pill */}
-        <motion.div variants={itemVariants}>
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-sm"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              color: "var(--text-secondary)",
-              fontFamily: "var(--font-dm-sans)",
-            }}
-          >
-            <span
-              className="green-dot w-2 h-2 rounded-full"
-              style={{ background: "#22c55e", flexShrink: 0 }}
-            />
-            {personalInfo.coopAvailability}
-          </div>
+        {/* Status row */}
+        <motion.div variants={item} className="flex items-center gap-2 mb-10">
+          <span
+            className="status-dot w-1.5 h-1.5 rounded-full flex-shrink-0"
+            style={{ background: "#22c55e" }}
+          />
+          <span className="mono-label">{personalInfo.coopAvailability}</span>
         </motion.div>
 
         {/* Name */}
         <motion.h1
-          variants={itemVariants}
-          className="font-mono font-bold text-white text-glow mb-4"
+          variants={item}
+          className="font-mono font-bold text-white mb-5"
           style={{
-            fontSize: "clamp(42px, 7vw, 80px)",
-            letterSpacing: "-0.02em",
-            lineHeight: 1.05,
+            fontSize: "clamp(38px, 6vw, 72px)",
+            letterSpacing: "-0.03em",
+            lineHeight: 1.02,
           }}
         >
-          {personalInfo.name}
+          Vaydeesh Desai
         </motion.h1>
 
-        {/* Typewriter */}
-        <motion.div
-          variants={itemVariants}
-          className="font-mono mb-6"
+        {/* Role — accent, no glow */}
+        <motion.p
+          variants={item}
+          className="font-mono mb-5"
           style={{
-            fontSize: "clamp(18px, 2.5vw, 26px)",
+            fontSize: "clamp(15px, 1.8vw, 20px)",
             color: "var(--accent-primary)",
-            minHeight: "2em",
+            letterSpacing: "0em",
+            opacity: 0.85,
           }}
         >
-          <Typewriter
-            options={{
-              strings: personalInfo.typewriterStrings,
-              autoStart: true,
-              loop: true,
-              delay: 60,
-              deleteSpeed: 40,
-            }}
-          />
-        </motion.div>
+          Software Engineer · CS + Finance @ Northeastern
+        </motion.p>
 
         {/* Tagline */}
         <motion.p
-          variants={itemVariants}
-          className="mb-10 leading-relaxed"
+          variants={item}
           style={{
             color: "var(--text-secondary)",
             maxWidth: 500,
-            fontSize: "clamp(15px, 1.8vw, 17px)",
+            fontSize: "clamp(14px, 1.4vw, 15px)",
             fontFamily: "var(--font-dm-sans)",
+            lineHeight: 1.7,
+            marginBottom: "2.5rem",
           }}
         >
           {personalInfo.tagline}
         </motion.p>
 
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center gap-4 mb-10"
-        >
-          <motion.button
+        {/* CTAs */}
+        <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-12">
+          <button
             className="btn-primary"
-            onClick={scrollToProjects}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
           >
-            View My Work
-          </motion.button>
-          <motion.a
+            View Work <ArrowRight size={13} />
+          </button>
+          <a
             href={personalInfo.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
           >
-            View Resume
-          </motion.a>
+            <FileText size={13} /> Resume
+          </a>
         </motion.div>
 
-        {/* Social icons */}
-        <motion.div variants={itemVariants} className="flex items-center gap-6">
-          <motion.a
-            href={`https://${personalInfo.github}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.2, color: "#00D4FF" }}
-            style={{ color: "var(--text-muted)" }}
-            className="transition-colors duration-200"
-            aria-label="GitHub"
-          >
-            <GitHubIcon size={24} />
-          </motion.a>
-          <motion.a
-            href={`https://${personalInfo.linkedin}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.2, color: "#00D4FF" }}
-            style={{ color: "var(--text-muted)" }}
-            className="transition-colors duration-200"
-            aria-label="LinkedIn"
-          >
-            <LinkedInIcon size={24} />
-          </motion.a>
-          <motion.a
-            href={`mailto:${personalInfo.email}`}
-            whileHover={{ scale: 1.2, color: "#00D4FF" }}
-            style={{ color: "var(--text-muted)" }}
-            className="transition-colors duration-200"
-            aria-label="Email"
-          >
-            <Mail size={24} />
-          </motion.a>
+        {/* Social row */}
+        <motion.div variants={item} className="flex items-center gap-6">
+          {[
+            { href: `https://${personalInfo.github}`, icon: <GitHubIcon size={15} />, label: "GitHub" },
+            { href: `https://${personalInfo.linkedin}`, icon: <LinkedInIcon size={15} />, label: "LinkedIn" },
+            { href: `mailto:${personalInfo.email}`, icon: <Mail size={15} />, label: personalInfo.email },
+          ].map(({ href, icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("mailto") ? undefined : "_blank"}
+              rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+              className="flex items-center gap-2 text-[12px] transition-colors duration-150 hover:text-white"
+              style={{ color: "var(--text-muted)", fontFamily: "var(--font-dm-sans)" }}
+            >
+              {icon}
+              <span className="hidden sm:inline">{label}</span>
+            </a>
+          ))}
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.button
-        onClick={scrollDown}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-        style={{ color: "var(--text-muted)" }}
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        whileHover={{ color: "var(--accent-primary)" }}
-        aria-label="Scroll down"
-      >
-        <ChevronDown size={28} />
-      </motion.button>
+      {/* Bottom divider */}
+      <div
+        className="absolute bottom-0 inset-x-0 h-px"
+        style={{ background: "var(--border-subtle)" }}
+      />
     </section>
   );
 }
