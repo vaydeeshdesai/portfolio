@@ -54,8 +54,11 @@ export default function About() {
           C/C++ sensor pipelines with zero failures across 50+ test cycles.
         </motion.p>
 
-        {/* Stats — centered row */}
-        <div className="flex flex-wrap justify-center gap-0 max-w-lg mx-auto">
+        {/* Stats — always single row, 3 cols */}
+        <div
+          className="grid grid-cols-3 max-w-md mx-auto"
+          style={{ borderTop: "1px solid var(--border-subtle)", borderBottom: "1px solid var(--border-subtle)" }}
+        >
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -63,20 +66,20 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" as const }}
-              className="flex flex-col items-center px-10 py-6"
+              className="flex flex-col items-center py-6"
               style={{
                 borderLeft: i > 0 ? "1px solid var(--border-subtle)" : undefined,
               }}
             >
               <span
                 className="font-mono font-bold mb-1"
-                style={{ fontSize: "26px", color: "var(--text-primary)", letterSpacing: "-0.03em" }}
+                style={{ fontSize: "24px", color: "var(--text-primary)", letterSpacing: "-0.02em" }}
               >
                 {stat.value}
               </span>
               <span
-                className="font-mono text-[11px] uppercase"
-                style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
+                className="font-mono text-[10px] uppercase text-center"
+                style={{ color: "var(--text-muted)", letterSpacing: "0.08em" }}
               >
                 {stat.label}
               </span>
