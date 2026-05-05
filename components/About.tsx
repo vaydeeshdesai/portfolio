@@ -9,7 +9,8 @@ const fadeUp: Variants = {
 
 const stats = [
   { value: "6+", label: "Years building" },
-  { value: "5+", label: "Technologies" },
+  { value: "3", label: "Roles & internships" },
+  { value: "2", label: "Projects shipped" },
 ];
 
 export default function About() {

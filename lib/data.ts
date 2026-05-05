@@ -51,6 +51,11 @@ export interface Certification {
   issuer: string;
 }
 
+export interface SkillGroup {
+  category: string;
+  skills: string[];
+}
+
 export const personalInfo: PersonalInfo = {
   name: "Vaydeesh Desai",
   email: "desai.vay@northeastern.edu",
@@ -142,6 +147,25 @@ export const projects: Project[] = [
     tech: ["Python", "Tkinter", "SQLite", "OOP", "Figma"],
     // TODO: Update to exact repo URL
     githubUrl: "https://github.com/vaydeeshdesai",
+  },
+];
+
+export const skillGroups: SkillGroup[] = [
+  {
+    category: "Languages",
+    skills: ["Python", "TypeScript", "JavaScript", "C/C++", "SQL", "Java"],
+  },
+  {
+    category: "Frameworks & Libraries",
+    skills: ["React", "Next.js", "FastAPI", "Prisma", "Pandas", "NumPy", "Matplotlib", "Tkinter"],
+  },
+  {
+    category: "Tools & Platforms",
+    skills: ["Docker", "Git", "PostgreSQL", "SQLite", "Figma", "Vercel"],
+  },
+  {
+    category: "Domains",
+    skills: ["Financial Engineering", "Data Pipelines", "REST APIs", "Full-Stack", "Data Analysis", "Systems Research"],
   },
 ];
 
