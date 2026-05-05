@@ -18,14 +18,14 @@ const item: Variants = {
 export default function Hero() {
   return (
     <section
-      className="relative flex items-center"
+      className="relative flex items-center justify-center"
       style={{ minHeight: "100vh", paddingTop: "56px" }}
     >
       <motion.div
         variants={container}
         initial="hidden"
         animate="visible"
-        className="section-container w-full py-28"
+        className="section-container w-full py-28 flex flex-col items-center text-center"
       >
         {/* Status row */}
         <motion.div variants={item} className="flex items-center gap-2 mb-12">
@@ -48,7 +48,7 @@ export default function Hero() {
             lineHeight: 1.0,
           }}
         >
-          Vaydeesh<br />Desai
+          Vaydeesh Desai
         </motion.h1>
 
         {/* Role */}
@@ -71,7 +71,7 @@ export default function Hero() {
           variants={item}
           style={{
             color: "var(--text-secondary)",
-            maxWidth: 460,
+            maxWidth: 480,
             fontSize: "15px",
             fontFamily: "var(--font-sans)",
             lineHeight: 1.75,
@@ -82,7 +82,7 @@ export default function Hero() {
         </motion.p>
 
         {/* CTAs */}
-        <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-14">
+        <motion.div variants={item} className="flex flex-wrap items-center justify-center gap-3 mb-14">
           <button
             className="btn-primary"
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
@@ -100,7 +100,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Social row */}
-        <motion.div variants={item} className="flex items-center gap-7">
+        <motion.div variants={item} className="flex items-center justify-center gap-7">
           {[
             { href: `https://${personalInfo.github}`, icon: <GitHubIcon size={14} />, label: "GitHub" },
             { href: `https://${personalInfo.linkedin}`, icon: <LinkedInIcon size={14} />, label: "LinkedIn" },
