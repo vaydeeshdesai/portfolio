@@ -23,7 +23,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <p className="section-eyebrow mb-3">About</p>
           <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
@@ -32,68 +32,56 @@ export default function About() {
           <div className="divider mt-4" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-16 items-start">
-          {/* Bio */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="lg:col-span-3"
-          >
-            <p
+        {/* Bio */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="text-center mx-auto mb-16"
+          style={{
+            color: "var(--text-secondary)",
+            fontFamily: "var(--font-sans)",
+            fontSize: "15px",
+            lineHeight: 1.8,
+            maxWidth: "600px",
+          }}
+        >
+          Computer Science and Business Administration student at Northeastern
+          University, concentrating in Finance. I design and ship full-stack
+          systems at the intersection of software and financial data — from
+          production risk dashboards processing live market feeds to low-level
+          C/C++ sensor pipelines with zero failures across 50+ test cycles.
+        </motion.p>
+
+        {/* Stats — centered row */}
+        <div className="flex flex-wrap justify-center gap-0 max-w-lg mx-auto">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" as const }}
+              className="flex flex-col items-center px-10 py-6"
               style={{
-                color: "var(--text-secondary)",
-                fontFamily: "var(--font-sans)",
-                fontSize: "15px",
-                lineHeight: 1.8,
+                borderLeft: i > 0 ? "1px solid var(--border-subtle)" : undefined,
               }}
             >
-              Computer Science and Business Administration student at
-              Northeastern University, concentrating in Finance. I design and
-              ship full-stack systems at the intersection of software and
-              financial data — from production risk dashboards processing live
-              market feeds to low-level C/C++ sensor pipelines with zero
-              failures across 50+ test cycles. My work is defined by technical
-              rigor, end-to-end ownership, and a rare fluency across both the
-              engineering stack and the financial domain.
-            </p>
-          </motion.div>
-
-          {/* Stats — ruled list, no cards */}
-          <div className="lg:col-span-2">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" as const }}
-                className="flex items-baseline justify-between py-4"
-                style={{
-                  borderBottom: "1px solid var(--border-subtle)",
-                  borderTop: i === 0 ? "1px solid var(--border-subtle)" : undefined,
-                }}
+              <span
+                className="font-mono font-bold mb-1"
+                style={{ fontSize: "26px", color: "var(--text-primary)", letterSpacing: "-0.03em" }}
               >
-                <span
-                  className="font-mono text-[11px] uppercase"
-                  style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
-                >
-                  {stat.label}
-                </span>
-                <span
-                  className="font-mono font-bold"
-                  style={{
-                    fontSize: stat.value.length > 6 ? "14px" : "18px",
-                    color: "var(--text-primary)",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {stat.value}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+                {stat.value}
+              </span>
+              <span
+                className="font-mono text-[11px] uppercase"
+                style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
+              >
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

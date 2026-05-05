@@ -20,7 +20,7 @@ export default function Projects() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <p className="section-eyebrow mb-3">Projects</p>
           <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>

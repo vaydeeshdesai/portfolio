@@ -18,7 +18,7 @@ export default function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <p className="section-eyebrow mb-3">Skills</p>
           <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
@@ -27,8 +27,10 @@ export default function Skills() {
           <div className="divider mt-4" />
         </motion.div>
 
-        {/* Skill groups */}
-        <div className="grid sm:grid-cols-2 gap-0 max-w-3xl">
+        {/* Skill groups — centered 2-col grid */}
+        <div className="grid sm:grid-cols-2 gap-px max-w-2xl mx-auto"
+          style={{ border: "1px solid var(--border-subtle)", borderRadius: "10px", overflow: "hidden" }}
+        >
           {skillGroups.map((group, i) => (
             <motion.div
               key={group.category}
@@ -36,11 +38,8 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" as const }}
-              className="py-6 pr-12"
-              style={{
-                borderBottom: "1px solid var(--border-subtle)",
-                borderTop: i < 2 ? "1px solid var(--border-subtle)" : undefined,
-              }}
+              className="p-6"
+              style={{ background: "var(--bg-card)" }}
             >
               <p
                 className="font-mono text-[11px] uppercase mb-4"

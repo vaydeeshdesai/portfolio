@@ -18,7 +18,7 @@ export default function Education() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <p className="section-eyebrow mb-3">Education</p>
           <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
@@ -33,7 +33,7 @@ export default function Education() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="card p-8 mb-6 max-w-3xl"
+          className="card p-8 mb-6 max-w-2xl mx-auto"
         >
           <div className="flex flex-col sm:flex-row gap-6">
             {/* NU mark */}

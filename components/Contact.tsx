@@ -41,7 +41,7 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <p className="section-eyebrow mb-3">Contact</p>
           <h2 className="section-title" style={{ fontSize: "clamp(24px, 3.5vw, 38px)" }}>
@@ -50,95 +50,94 @@ export default function Contact() {
           <div className="divider mt-4" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start max-w-3xl">
-          {/* Left: copy + availability */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+        {/* Copy */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="text-center mb-10"
+        >
+          <p
+            className="mx-auto mb-6"
+            style={{
+              color: "var(--text-secondary)",
+              fontFamily: "var(--font-sans)",
+              lineHeight: 1.8,
+              fontSize: "15px",
+              maxWidth: "480px",
+            }}
           >
-            <p
-              className="leading-relaxed mb-8 text-sm"
-              style={{
-                color: "var(--text-secondary)",
-                fontFamily: "var(--font-sans)",
-                lineHeight: 1.8,
-                fontSize: "15px",
-              }}
-            >
-              I&apos;m on co-op for July–December 2026. If you&apos;re working on
-              something at the edge of finance and technology — or just want to
-              talk engineering — reach out.
-            </p>
+            I&apos;m on co-op for July–December 2026. If you&apos;re working on
+            something at the edge of finance and technology — or just want to
+            talk engineering — reach out.
+          </p>
 
-            {/* Availability badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded"
-              style={{
-                border: "1px solid rgba(34,197,94,0.2)",
-                background: "rgba(34,197,94,0.05)",
-              }}
+          {/* Availability badge */}
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded"
+            style={{
+              border: "1px solid rgba(34,197,94,0.2)",
+              background: "rgba(34,197,94,0.05)",
+            }}
+          >
+            <span
+              className="status-dot w-1.5 h-1.5 rounded-full flex-shrink-0"
+              style={{ background: "#22c55e" }}
+            />
+            <span
+              className="font-mono text-[11px]"
+              style={{ color: "#22c55e", opacity: 0.85, letterSpacing: "0.06em" }}
+            >
+              CO-OP · JUL–DEC 2026
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Link cards — centered column */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-col gap-3 max-w-md mx-auto"
+        >
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("mailto") ? undefined : "_blank"}
+              rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+              className="card flex items-center gap-4 px-5 py-4 group transition-colors duration-150"
+              style={{ textDecoration: "none" }}
             >
               <span
-                className="status-dot w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ background: "#22c55e" }}
-              />
-              <span
-                className="font-mono text-[11px]"
-                style={{ color: "#22c55e", opacity: 0.85, letterSpacing: "0.06em" }}
+                className="flex-shrink-0 transition-colors duration-150"
+                style={{ color: "var(--text-muted)" }}
               >
-                CO-OP · JUL–DEC 2026
+                {link.icon}
               </span>
-            </div>
-          </motion.div>
-
-          {/* Right: link list */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <div className="flex flex-col gap-3">
-              {links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                  rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                  className="card flex items-center gap-4 px-5 py-4 group transition-colors duration-150"
-                  style={{ textDecoration: "none" }}
+              <div className="min-w-0 flex-1">
+                <p className="mono-label mb-0.5">{link.label}</p>
+                <p
+                  className="text-[13px] truncate transition-colors duration-150 group-hover:text-white"
+                  style={{
+                    color: "var(--text-secondary)",
+                    fontFamily: "var(--font-sans)",
+                  }}
                 >
-                  <span
-                    className="flex-shrink-0 transition-colors duration-150"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    {link.icon}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="mono-label mb-0.5">{link.label}</p>
-                    <p
-                      className="text-[13px] truncate transition-colors duration-150 group-hover:text-white"
-                      style={{
-                        color: "var(--text-secondary)",
-                        fontFamily: "var(--font-sans)",
-                      }}
-                    >
-                      {link.display}
-                    </p>
-                  </div>
-                  <span
-                    className="flex-shrink-0 font-mono text-[11px] opacity-0 group-hover:opacity-40 transition-opacity duration-150"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    ↗
-                  </span>
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+                  {link.display}
+                </p>
+              </div>
+              <span
+                className="flex-shrink-0 font-mono text-[11px] opacity-0 group-hover:opacity-40 transition-opacity duration-150"
+                style={{ color: "var(--text-primary)" }}
+              >
+                ↗
+              </span>
+            </a>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
