@@ -87,8 +87,8 @@ export default function Education() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <p className="mono-label mb-3">Certifications</p>
-          <div className="flex flex-wrap gap-2">
+          <p className="mono-label mb-3 text-center">Certifications</p>
+          <div className="flex flex-wrap gap-2 justify-center max-w-2xl mx-auto">
             {education.certifications.map((cert) => (
               <div
                 key={cert.name}
